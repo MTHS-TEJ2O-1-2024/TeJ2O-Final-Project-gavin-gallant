@@ -12,29 +12,40 @@ basic.showIcon(IconNames.Happy)
 let distanceToObject: number = 0
 
 
-if (distanceToObject < 30){
-    robotbit.Servo(servoNumber1, 30)
-    basic.clearScreen()
-    basic.showLeds(`
+// forever loops
+
+while (true) {
+    distanceToObject = sonar.ping(
+        DigitalPin.P1,
+        DigitalPin.P2,
+        PingUnit.Centimeters
+    )
+
+    if (distanceToObject < 10) {
+        robotbit.Servo(servoNumber1, 30)
+        basic.clearScreen()
+        basic.showLeds(`
         . . . . .
         . # . # .
         . . . . .
         # # # # #
         . . . . . 
         `)
+    } else {
+        robotbit.Servo(servoNumber1, 180)
+        basic.clearScreen()
+        basic.showIcon(IconNames.Happy)
+    }
+
+    input.onButtonPressed(Button.A, function () {
+        break
+    }
 }
 
-if (distanceToObject > 30) {
-    robotbit.Servo(servoNumber1, 180)
-    basic.clearScreen()
-    basic.showIcon(IconNames.Happy)
-}
-
-
-loops.everyInterval(100, function () {
-    distanceToObject = sonar.ping(
-        DigitalPin.P1,
-        DigitalPin.P2,
-        PingUnit.Centimeters
-    )
-})
+basic.showLeds(`
+. . . . .
+. . . . .
+. . # . .
+. . . . .
+. . . . .
+`)
