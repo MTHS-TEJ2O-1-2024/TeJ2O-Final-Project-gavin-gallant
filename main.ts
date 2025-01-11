@@ -13,35 +13,38 @@ let distanceToObject: number = 0
 
 
 // forever loops
+distanceToObject = sonar.ping(
+    DigitalPin.P1,
+    DigitalPin.P2,
+    PingUnit.Centimeters
+)
+input.onButtonPressed(Button.A, function () {
 
-while (true) {
-    distanceToObject = sonar.ping(
-        DigitalPin.P1,
-        DigitalPin.P2,
-        PingUnit.Centimeters
-    )
 
-    if (distanceToObject < 10) {
-        robotbit.Servo(servoNumber1, 30)
-        basic.clearScreen()
-        basic.showLeds(`
-        . . . . .
-        . # . # .
-        . . . . .
-        # # # # #
-        . . . . . 
-        `)
-    } else {
-        robotbit.Servo(servoNumber1, 180)
-        basic.clearScreen()
-        basic.showIcon(IconNames.Happy)
+    while (true) {
+            distanceToObject = sonar.ping(
+            DigitalPin.P1,
+            DigitalPin.P2,
+            PingUnit.Centimeters
+        )
+
+        if (distanceToObject < 10) {
+            robotbit.Servo(servoNumber1, 30)
+            basic.clearScreen()
+            basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . . . .
+            # # # # #
+            . . . . . 
+            `)
+        } else {
+            robotbit.Servo(servoNumber1, 180)
+            basic.clearScreen()
+            basic.showIcon(IconNames.Happy)
+        }
     }
-
-    input.onButtonPressed(Button.A, function () {
-        break
-    }
-}
-
+})
 basic.showLeds(`
 . . . . .
 . . . . .
