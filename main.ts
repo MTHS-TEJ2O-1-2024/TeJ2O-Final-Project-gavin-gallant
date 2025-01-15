@@ -9,7 +9,10 @@
 const servoNumber1 = robotbit.Servos.S1
 basic.clearScreen()
 let distanceToObject: number = 0
-let PasscodeTime: number = 0
+let passwordInput = 0        // Current password input value
+let attempts = 0             // Track number of attempts
+let maxAttempts = 4          // Maximum allowed attempts
+const correctPassword = 3    // Correct password value
 
 
 distanceToObject = sonar.ping(
@@ -17,10 +20,11 @@ distanceToObject = sonar.ping(
     DigitalPin.P2,
     PingUnit.Centimeters
 )
-input.onButtonPressed(Button.A, function () {
+input.onButtonPressed(Button.AB, function () {
 
     // forever loops
     while (true) {
+            //get distanceToObject
             distanceToObject = sonar.ping(
             DigitalPin.P1,
             DigitalPin.P2,
@@ -42,8 +46,7 @@ input.onButtonPressed(Button.A, function () {
             basic.clearScreen()
             basic.showIcon(IconNames.Happy)
         }
-        PasscodeTime = 10
-        if (input.buttonIsPressed(Button.B) == true) {
+        if (input.buttonIsPressed(Button.A) == true) {
             robotbit.Servo(servoNumber1, 180)
             basic.showIcon(IconNames.Yes)
             break
@@ -53,9 +56,9 @@ input.onButtonPressed(Button.A, function () {
 
 })
 basic.showLeds(`
+. . . . .
+. . . . .
 . . # . .
-. # . # .
-# . . . #
-# # # # #
-# . . . #
+. . . . .
+. . . . .
 `)
