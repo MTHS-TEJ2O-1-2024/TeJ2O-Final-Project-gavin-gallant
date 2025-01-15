@@ -24,7 +24,7 @@ input.onButtonPressed(Button.AB, function () {
 
     // forever loops
     while (true) {
-            //get distanceToObject
+            //get distance To Object
             distanceToObject = sonar.ping(
             DigitalPin.P1,
             DigitalPin.P2,
@@ -47,11 +47,35 @@ input.onButtonPressed(Button.AB, function () {
             basic.showIcon(IconNames.Happy)
         }
         if (input.buttonIsPressed(Button.A) == true) {
-            robotbit.Servo(servoNumber1, 180)
-            basic.showIcon(IconNames.Yes)
-            break
+            if (attempts < maxAttempts) {
+                passwordInput += 1
+                basic.showNumber(passwordInput)
+            }
         }
 
+        if (input.buttonIsPressed(Button.B) == true) {
+            if (attempts < maxAttempts) {
+                passwordInput -= 1
+                basic.showNumber(passwordInput)
+            }
+        }
+        //Verify password when logo Is Pressed 
+        if (input.isGesture(Gesture.Shake) == true) {
+            attempts += 1
+
+            if (passwordInput == correctPassword) {
+                basic.showIcon(IconNames.Yes) // Show success icon if correct
+                music.playMelody("C5 B A G F E D C ", 120)
+                robotbit.Servo(servoNumber1, 180)
+                break
+
+            } else if (attempts >= maxAttempts) {
+                basic.showIcon(IconNames.No) // Show failure icon if out of attempts
+                music.playMelody("C D E F G A B C5 ", 120)
+            } else {
+                basic.showNumber(maxAttempts - attempts) // Show remaining attempts
+            }
+        }
     }
 
 })
