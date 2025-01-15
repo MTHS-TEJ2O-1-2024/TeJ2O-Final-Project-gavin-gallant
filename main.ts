@@ -46,10 +46,6 @@ input.onButtonPressed(Button.A, function () {
         if (input.buttonIsPressed(Button.B) == true) {
             robotbit.Servo(servoNumber1, 180)
             basic.showIcon(IconNames.Yes)
-            while(PasscodeTime <0)
-                PasscodeTime--
-                basic.showNumber(PasscodeTime)
-                basic.pause(1000)
             break
         }
 
@@ -57,9 +53,9 @@ input.onButtonPressed(Button.A, function () {
 
 })
 basic.showLeds(`
-. . . . .
-. . . . .
 . . # . .
-. . . . .
-. . . . .
+. # . # .
+# . . . #
+# # # # #
+# . . . #
 `)
