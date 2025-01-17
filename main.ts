@@ -46,14 +46,14 @@ input.onButtonPressed(Button.AB, function () {
             basic.clearScreen()
             basic.showIcon(IconNames.Happy)
         }
-        if (input.buttonIsPressed(Button.A) == true) {
+        if (input.buttonIsPressed(Button.B) == true) {
             if (attempts < maxAttempts) {
                 passwordInput += 1
                 basic.showNumber(passwordInput)
             }
         }
 
-        if (input.buttonIsPressed(Button.B) == true) {
+        if (input.buttonIsPressed(Button.A) == true) {
             if (attempts < maxAttempts) {
                 passwordInput -= 1
                 basic.showNumber(passwordInput)
