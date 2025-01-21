@@ -1,3 +1,4 @@
+
 /* Copyright (c) 2020 MTHS All rights reserved
  *
  * Created by: Gavin Gallant and Fransisco Rocco Aolgeri
@@ -31,7 +32,7 @@ input.onButtonPressed(Button.AB, function () {
             PingUnit.Centimeters
         )
 
-        if (distanceToObject < 15) {
+        if (distanceToObject < 10) {
             robotbit.Servo(servoNumber1, 30)
             basic.clearScreen()
             basic.showLeds(`
